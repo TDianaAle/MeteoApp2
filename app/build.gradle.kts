@@ -22,11 +22,14 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:31.1-jre")
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+implementation("com.googlecode.json-simple:json-simple:1.1")
+    
 }
 
 application {
     // Define the main class for the application.
-    mainClass.set("meteoapp2.App")
+    mainClass.set("com.meteoapp2.AppLauncher")
 }
 
 tasks.named<Test>("test") {

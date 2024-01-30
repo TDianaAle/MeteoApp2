@@ -1,3 +1,4 @@
+package com.meteoapp2;
 import javax.swing.SwingUtilities;
 
 public class AppLauncher {
