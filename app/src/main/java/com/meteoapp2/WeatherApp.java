@@ -27,7 +27,7 @@ public class WeatherApp {
         // build API request URL with location coordinates
         String urlString = "https://api.open-meteo.com/v1/forecast?" +
                 "latitude=" + latitude + "&longitude=" + longitude +
-                "&hourly=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&timezone=America%2FLos_Angeles";
+                "&hourly=temperature_2m,relativehumidity_2m,weathercode,windspeed_10m&timezone=Europe%2FItaly";
 
         try{
             // call api and get response
@@ -36,7 +36,7 @@ public class WeatherApp {
             // check for response status
             // 200 - means that the connection was a success
             if(conn.getResponseCode() != 200){
-                System.out.println("Error: Could not connect to API");
+                System.out.println("Error: Nessuna connessione con API");
                 return null;
             }
 
@@ -81,13 +81,33 @@ public class WeatherApp {
             // get windspeed
             JSONArray windspeedData = (JSONArray) hourly.get("windspeed_10m");
             double windspeed = (double) windspeedData.get(index);
+            
+            //get pressure
+            JSONArray pressureData = (JSONArray) hourly.get("pressione_atm");
+            double pressure = (double) pressureData.get(index);
+            
+            //get visibility
+            JSONArray visibilityData = (JSONArray) hourly.get("visibilità");
+            double visibility = (double) visibilityData.get(index);
+            
+          //get sunrise
+            JSONArray sunriseData = (JSONArray) hourly.get("alba");
+            double sunrise = (double) sunriseData.get(index);
+            
+          //get sunset
+            JSONArray sunsetData = (JSONArray) hourly.get("tramonto");
+            double sunset = (double) sunsetData.get(index);
+
 
             // build the weather json data object that we are going to access in our frontend
             JSONObject weatherData = new JSONObject();
-            weatherData.put("temperature", temperature);
-            weatherData.put("weather_condition", weatherCondition);
-            weatherData.put("humidity", humidity);
-            weatherData.put("windspeed", windspeed);
+            weatherData.put("temperatura", temperature);
+            weatherData.put("condizioni_meteo", weatherCondition);
+            weatherData.put("umidità", humidity);
+            weatherData.put("vento", windspeed);
+            weatherData.put("pressione_atm", pressure);
+            weatherData.put("alba", sunrise);
+            weatherData.put("tramonto", sunset);
 
             return weatherData;
         }catch(Exception e){
@@ -184,43 +204,38 @@ public class WeatherApp {
     }
 
     private static String getCurrentTime(){
-        // get current date and time
+        // get data e orario
         LocalDateTime currentDateTime = LocalDateTime.now();
 
-        // format date to be 2023-09-02T00:00 (this is how is is read in the API)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH':00'");
 
-        // format and print the current date and time
+        // format e print data e ora attuale
         String formattedDateTime = currentDateTime.format(formatter);
 
         return formattedDateTime;
     }
 
-    // convert the weather code to something more readable
+    // conversione del codice meteo in readable
     private static String convertWeatherCode(long weathercode){
         String weatherCondition = "";
         if(weathercode == 0L){
-            // clear
-            weatherCondition = "Clear";
+            // sereno
+            weatherCondition = "Sereno";
         }else if(weathercode > 0L && weathercode <= 3L){
-            // cloudy
-            weatherCondition = "Cloudy";
+            // nuvoloso
+            weatherCondition = "Nuvoloso";
         }else if((weathercode >= 51L && weathercode <= 67L)
                     || (weathercode >= 80L && weathercode <= 99L)){
-            // rain
-            weatherCondition = "Rain";
+            // pioggia
+            weatherCondition = "Pioggia";
         }else if(weathercode >= 71L && weathercode <= 77L){
-            // snow
-            weatherCondition = "Snow";
+            // neve
+            weatherCondition = "Neve";
         }
 
         return weatherCondition;
     }
 }
-
-
-
-
 
 
 

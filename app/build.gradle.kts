@@ -26,6 +26,9 @@ dependencies {
 implementation("com.googlecode.json-simple:json-simple:1.1")
     
 }
+dependencies {
+    implementation ("uk.co.caprica:vlcj:4.8.0")
+}
 
 application {
     // Define the main class for the application.
