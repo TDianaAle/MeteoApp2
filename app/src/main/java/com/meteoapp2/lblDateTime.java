@@ -5,9 +5,9 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DateTimePanel extends JPanel {
+public class lblDateTime extends JFrame {
 
-    private JLabel dateTimeLabel;
+    private JLabel lblDateTime;
 
     public DateTimePanel() {
         setLayout(new BorderLayout());
