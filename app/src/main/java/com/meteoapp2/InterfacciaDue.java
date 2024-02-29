@@ -12,10 +12,13 @@ import javax.swing.SwingUtilities;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class InterfacciaDue extends JFrame {
 
@@ -25,23 +28,23 @@ public class InterfacciaDue extends JFrame {
 	private JLabel Date;
 	
 
-	/**
-	 * Create the frame.
-	 */
 	public InterfacciaDue() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InterfacciaDue.class.getResource("/assets/mhome.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setSize(616, 432);
-		getTitle();
+		setTitle("Domoteo");
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(104, 193, 236));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Domotica");
-		lblNewLabel.setBounds(455, 3, 141, 39);
+		lblNewLabel.setBounds(434, 17, 106, 97);
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel);
@@ -59,7 +62,7 @@ public class InterfacciaDue extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setBounds(162, 18, 141, 100);
+		lblNewLabel_3.setBounds(172, 18, 121, 100);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/kitchen.jpg")));
 		contentPane.add(lblNewLabel_3);
@@ -70,22 +73,78 @@ public class InterfacciaDue extends JFrame {
 		lblNewLabel_5.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bathroom.png")));
 		contentPane.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("<soleggiato");
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_6.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_6.setBounds(46, 18, 101, 100);
-		lblNewLabel_6.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/clear.png")));
-		contentPane.add(lblNewLabel_6);
+		JLabel Weather = new JLabel("");
+		Weather.setOpaque(true);
+		Weather.setBackground(new Color(255, 255, 255));
+		Weather.setHorizontalAlignment(SwingConstants.CENTER);
+		Weather.setBounds(54, 17, 101, 100);
+		Weather.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/clear.png")));
+		contentPane.add(Weather);
+		
+		Weather.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	
+            	
+                // Chiudi la finestra corrente (Interfaccia)
+                dispose();
+
+                // Riapri la finestra dell'interfaccia precedente
+                Interfaccia interfaccia = new Interfaccia();
+                setLocationRelativeTo(null);
+                interfaccia.setVisible(true);
+            }
+
+			public void mouseClicked1(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				 // Cambia il cursore quando il mouse entra nel pulsante
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				 // Ripristina il cursore quando il mouse esce dal pulsante
+                setCursor(Cursor.getDefaultCursor());
+			
+			}
+        });
 		
 		JLabel Date = new JLabel("");
+		Date.setOpaque(true);
 		Date.setBackground(new Color(255, 255, 255));
-		Date.setBounds(50, 150, 103, 43);
+		Date.setBounds(51, 150, 103, 43);
 		contentPane.add(Date);
 		
 		JLabel Time = new JLabel("");
+		Time.setOpaque(true);
 		Time.setBackground(new Color(255, 255, 255));
-		Time.setBounds(49, 201, 107, 43);
+		Time.setBounds(50, 201, 104, 43);
 		contentPane.add(Time);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bedroom2.jpg")));
+		lblNewLabel_4.setBounds(436, 149, 104, 99);
+		contentPane.add(lblNewLabel_4);
 	}
 
 	public  String getCurrentDateTime() {
