@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -24,30 +26,36 @@ public class MeteoApp {
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-     //       StringBuilder response = new StringBuilder();
-      //      String line;
-       //     while ((line = reader.readLine()) != null) {
-       //         response.append(line);
-       //     }
-            
-       //     reader.close();
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            return jsonObject;
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(reader);
+                reader.close();
+                return jsonObject;
+            } else {
+                System.err.println("HTTP request failed with response code: " + responseCode);
+                JOptionPane.showMessageDialog(null, "Errore nella richiesta API", "Errore", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Errore richiesta API", "Errore", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Errore nella richiesta API", "Errore", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
-
 	public static String getApiKey() {
 		return API_KEY;
 	}
 
+	public static JSONObject getjsonObject(String cityName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	
 public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> new Interfaccia());
+
 }
 }
