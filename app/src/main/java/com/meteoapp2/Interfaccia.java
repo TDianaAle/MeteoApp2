@@ -58,6 +58,7 @@ public class Interfaccia extends JFrame {
         setTitle("Domoteo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(616, 432);
+        setLocationRelativeTo(null);
         initComponents();  
 	}
         //inizializzazione dei componenti dell'interfaccia utente
