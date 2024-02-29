@@ -50,9 +50,10 @@ public class Interfaccia extends JFrame {
 	private JLabel sunriseText;
 	private JLabel humidityText; 
 	private JLabel visibilitaText;
-	
+	private JLabel weatherDataLabel;
 
 	public Interfaccia() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Interfaccia.class.getResource("/assets/clear.png")));
 		
 		// Inizializzazione del frame
         setTitle("Domoteo");
@@ -574,7 +575,7 @@ public class Interfaccia extends JFrame {
 							        
 								    if (main != null && weatherArray != null && weatherArray.size() > 0) {
 								        
-								    	
+								    	long id = (long) weatherData.get("id");
 								    	double temp = (double) main.get("temp");
 								        double temp_min = (double) main.get("temp_min");
 								        double temp_max = (double) main.get("temp_max");
@@ -597,11 +598,10 @@ public class Interfaccia extends JFrame {
 								        humidityText.setText(String.valueOf(humidity +  " " + "%"));
 								        weatherDescription.setText(description);
 								        windspeedText.setText(String.valueOf(windSpeed + " " + "m/h"));
-								       // sunriseText.setText(String.valueOf(sunrise*1000));
-								       // sunsetText.setText(String.valueOf(sunset*1000));
-								       // CurrentDateText.setText(String.valueOf(dt));
 								        visibilitaText.setText(String.valueOf(visibility + " " + "m"));
+								        weatherDataLabel.setText(String.valueOf(dt));
 								        
+								        //gestione degli errori
 								    } else {
 								        temperatureText.setText("Errore");
 								        maxText.setText("Errore");
@@ -619,13 +619,13 @@ public class Interfaccia extends JFrame {
 								
 								private void updateTime(long sunrise, long sunset, long dt) {
 									
-									 TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
-							        // Converti i timestamp in oggetti Date
+									 TimeZone.setDefault(TimeZone.getTimeZone("UTC+1"));
+							        // Conversione di timestamp in oggetti Date
 							        Date sunriseDate = new Date(sunrise * 1000);
 							        Date sunsetDate = new Date(sunset * 1000);
 							        Date dtDate = new Date(dt * 1000);
 							  
-								// Formatta le date in stringhe leggibili
+								// Formattazione delle date in stringhe leggibili
 						        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 						        String formattedSunrise = dateFormat.format(sunriseDate);
 						        String formattedSunset = dateFormat.format(sunsetDate);
