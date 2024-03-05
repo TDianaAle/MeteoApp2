@@ -9,4 +9,4 @@
  */
 
 rootProject.name = "meteoapp2"
-include("plugin")
+include("App")

@@ -3,11 +3,14 @@
  */
 package meteoapp2;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
-class AppTest {
-    @Test void appHasAGreeting() {
-      //  App classUnderTest = new App();
-        //assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+public class AppTest {
+    
+    @Test
+    public void app() {
+        // Assert statement
+        assertTrue(true); // Esempio di un test semplice che passa sempre
     }
 }

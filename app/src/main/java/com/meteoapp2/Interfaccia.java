@@ -1,17 +1,15 @@
+
 package com.meteoapp2;
  import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 import javax.swing.ImageIcon;
@@ -23,23 +21,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.text.DateFormatter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
-import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.embedded.videosurface.VideoSurface;
-
-import javax.swing.border.LineBorder;
-
-
 public class Interfaccia extends JFrame {
 	
-    private JLabel temperatureText;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel temperatureText;
 	private JLabel weatherDescription;
 	private JLabel maxText;
     private JLabel minText;
@@ -50,47 +45,32 @@ public class Interfaccia extends JFrame {
 	private JLabel sunriseText;
 	private JLabel humidityText; 
 	private JLabel visibilitaText;
-	private JLabel weatherDataLabel;
+	
 
 	public Interfaccia() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Interfaccia.class.getResource("/assets/clear.png")));
+		setFont(new Font("Dialog", Font.BOLD, 10));
+		setResizable(false);
 		
 		// Inizializzazione del frame
         setTitle("Domoteo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(616, 432);
+        setSize(613, 434);
         setLocationRelativeTo(null);
-        initComponents();  
+        initComponents();
 	}
-        //inizializzazione dei componenti dell'interfaccia utente
-	static EmbeddedMediaPlayerComponent myMedia = new EmbeddedMediaPlayerComponent();
-	
-	//Canvas canvas = new Canvas();
-   // MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
- //   CanvasVideoSurface videoSurface = mediaPlayerFactory.newVideoSurface(canvas);
-   // EmbeddedMediaPlayer mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
-   // mediaPlayer.setVideoSurface(videoSurface);
-
-  //  mediaPlayer.playMedia(String with the name of the file);
+        //inizializzazione dei componenti dell'interfaccia 
         private void initComponents() {
         JPanel contentPane = new JPanel();
-        contentPane.setOpaque(false);
-        contentPane.setLayout(null);
-    //   myMedia.mediaPlayer().media().start("/app/src/main/java/assets/rain.mp4.mp4");
-     //   myMedia.setBounds(0, 0, 610, 430);
-      //  contentPane.setDisplayedMnemonicIndex(NORMAL);
-        
-        // Inizializzazione delle variabili
-        temperatureText = new JLabel();
-        temperatureText.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
+        contentPane.setBackground(new Color(180, 194, 252));
         maxText = new JLabel();
         minText = new JLabel();
         pressioneText = new JLabel();
-        weatherDescription = new JLabel();
-        weatherDescription.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
-        weatherDescription.setForeground(new Color(0, 0, 0));
         weatherData();
         CurrentDateText = new JLabel();
+        CurrentDateText.setHorizontalTextPosition(SwingConstants.CENTER);
+        CurrentDateText.setText("<html><center>06-12-2014 <br> 14:36:00 </center></html>");
+        CurrentDateText.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
         CurrentDateText.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
         windspeedText = new JLabel();
         sunsetText = new JLabel();
@@ -106,37 +86,47 @@ public class Interfaccia extends JFrame {
         
         //aggiunta delle label per le icone e descrizione di esse; ad ogni label appartiene una seconda label.Text dove verannò visualizzati i dati chiamati dall'API
         JLabel weatherDataLabel = new JLabel();
+        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
         weatherDataLabel.setToolTipText("");
-        weatherDataLabel.setBounds(20, 70, 132, 85);
+        weatherDataLabel.setBounds(20, 71, 130, 184);
         weatherDataLabel.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
         weatherDataLabel.setBackground(new Color(255, 255, 255, 100));
         weatherDataLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
-        weatherDataLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/mparty.png")));
-        weatherDataLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+  
         weatherDataLabel.setAlignmentY(Component.TOP_ALIGNMENT);
         contentPane.add(weatherDataLabel);
+             weatherDataLabel.setLayout(null);
         
-        temperatureText.setBounds(20, 163, 132, 55);
+
+             
+             // Inizializzazione delle variabili
+             temperatureText = new JLabel();
+            
+             temperatureText.setVerticalTextPosition(SwingConstants.BOTTOM);
+             temperatureText.setText("17 °C");
+             temperatureText.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/clear.png")));
+             temperatureText.setBounds(4, 2, 130, 148);
+             weatherDataLabel.add(temperatureText);
+             temperatureText.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
         temperatureText.setBackground(new Color(255, 255, 255, 100));
         temperatureText.setHorizontalTextPosition(SwingConstants.CENTER);
         temperatureText.setHorizontalAlignment(SwingConstants.CENTER);
         temperatureText.setFont(new Font("Tahoma", Font.BOLD, 24));
-        contentPane.add(temperatureText);
-       
-        weatherDescription.setBounds(20, 226, 133, 27);
+        weatherDescription = new JLabel();
+        weatherDescription.setBounds(-1, 157, 137, 25);
+        weatherDataLabel.add(weatherDescription);
+        weatherDescription.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
+        weatherDescription.setForeground(new Color(0, 0, 0));
         weatherDescription.setHorizontalTextPosition(SwingConstants.CENTER);
         weatherDescription.setHorizontalAlignment(SwingConstants.CENTER);
         weatherDescription.setBackground(new Color(255, 255, 255, 100));
         weatherDescription.setLayout(null);
         
         weatherDescription.setFont(new Font("Dialog", Font.BOLD, 12));
-        weatherDescription.setText("Parzialmente Nuvoloso");
-        contentPane.add(weatherDescription);
+        weatherDescription.setText("sereno");
         
-        CurrentDateText.setBounds(20, 265, 133, 111);
-        CurrentDateText.setFont(new Font("Tahoma", Font.BOLD, 11));
+        CurrentDateText.setBounds(18, 265, 133, 111);
+        CurrentDateText.setFont(new Font("Tahoma", Font.BOLD, 14));
         CurrentDateText.setHorizontalAlignment(SwingConstants.CENTER);
         CurrentDateText.setBackground(new Color(240, 240, 240, 100));
         contentPane.add(CurrentDateText);
@@ -166,13 +156,13 @@ public class Interfaccia extends JFrame {
         		 contentPane.add(maxText);
  
         		JLabel max = new JLabel();
+        		max.setVerticalAlignment(SwingConstants.BOTTOM);
         		max.setBounds(166, 164, 99, 57);
         		max.setVerticalTextPosition(SwingConstants.TOP);
-        		max.setVerticalAlignment(SwingConstants.TOP);
         		max.setOpaque(true);
         		max.setHorizontalTextPosition(SwingConstants.CENTER);
         		max.setHorizontalAlignment(SwingConstants.CENTER);
-        		max.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cold2.png")));
+        		max.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cold.jpeg")));
         		max.setBackground(new Color(255, 255, 255, 100));
         		max.setBorder(new LineBorder(new Color(128, 128, 255), 1, true));
         		contentPane.add(max);
@@ -188,17 +178,17 @@ public class Interfaccia extends JFrame {
         		contentPane.add(minText);
 
      JLabel windspeed = new JLabel("Vento");
+     windspeed.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/windspeed2.png")));
      windspeed.setBounds(479, 71, 97, 58);
      windspeed.setBackground(new Color(240, 240, 240, 100));
      windspeed.setOpaque(true);
      windspeed.setFont(new Font("Tahoma", Font.BOLD, 10));
      windspeed.setHorizontalAlignment(SwingConstants.CENTER);
-     windspeed.setText("Vento");
+     windspeed.setText("");
      windspeed.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
-     windspeed.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/windspeed2.png")));
+
 	 windspeed.setHorizontalTextPosition(SwingConstants.CENTER);
 	 windspeed.setAlignmentY(Component.TOP_ALIGNMENT);
-	 windspeed.setVerticalAlignment(SwingConstants.TOP);
 	 windspeed.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
     contentPane.add(windspeed);
 
@@ -211,16 +201,16 @@ public class Interfaccia extends JFrame {
      contentPane.add(windspeedText);
 
      JLabel lblhumidity = new JLabel();
-     lblhumidity.setBounds(272, 165, 99, 56);
+     lblhumidity.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/humidity.png")));
+     lblhumidity.setBounds(273, 165, 96, 56);
      lblhumidity.setVerticalAlignment(SwingConstants.TOP);
      lblhumidity.setOpaque(true);
      lblhumidity.setBackground(new Color(240, 240, 240, 100));
      lblhumidity.setFont(new Font("Tahoma", Font.BOLD, 10));
     
      lblhumidity.setHorizontalAlignment(SwingConstants.CENTER);
-     lblhumidity.setText("Umidità");
      lblhumidity.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
-     lblhumidity.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/humidity.png")));
+
 
 	 lblhumidity.setHorizontalTextPosition(SwingConstants.CENTER);
 	 lblhumidity.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -257,18 +247,18 @@ public class Interfaccia extends JFrame {
      contentPane.add(sunsetText);
      
      JLabel pressione = new JLabel("PressionePanel");
+     pressione.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/pressione2.jpeg")));
      pressione.setBounds(379, 71, 95, 57);
      pressione.setOpaque(true);
      pressione.setBackground(new Color(240, 240, 240, 100));
      pressione.setFont(new Font("Tahoma", Font.BOLD, 10));
      pressione.setHorizontalAlignment(SwingConstants.CENTER);
-     pressione.setText("Pressione Atm");
+     pressione.setText("");
      pressione.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
-     pressione.setIcon(new ImageIcon("C:\\Users\\15-DW1087\\Downloads\\WhatsApp Image 2024-02-20 at 23.23.10.jpeg"));
+     
 
 	 pressione.setHorizontalTextPosition(SwingConstants.CENTER);
 	 pressione.setAlignmentY(Component.TOP_ALIGNMENT);
-	 pressione.setVerticalAlignment(SwingConstants.TOP);
 	 pressione.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
      contentPane.add(pressione);
      
@@ -281,18 +271,17 @@ public class Interfaccia extends JFrame {
      
   
      JLabel Sunrise = new JLabel("Alba");
+     Sunrise.setVerticalAlignment(SwingConstants.TOP);
+     Sunrise.setVerticalTextPosition(SwingConstants.TOP);
      Sunrise.setBounds(378, 165, 96, 56);
      Sunrise.setOpaque(true);
      Sunrise.setBackground(new Color(255, 255, 255, 100));
      Sunrise.setFont(new Font("Tahoma", Font.BOLD, 10));
      Sunrise.setHorizontalAlignment(SwingConstants.CENTER);
-    
-     Sunrise.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
-     Sunrise.setIcon(new ImageIcon("C:\\Users\\15-DW1087\\Desktop\\MeteoApp2\\app\\src\\main\\java\\assets\\sunrise2.png"));
+     Sunrise.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/sunrise-clipart-md.png")));
      
 	 Sunrise.setHorizontalTextPosition(SwingConstants.CENTER);
 	 Sunrise.setAlignmentY(Component.TOP_ALIGNMENT);
-	 Sunrise.setVerticalAlignment(SwingConstants.TOP);
 	 Sunrise.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
      contentPane.add(Sunrise);
      
@@ -304,21 +293,20 @@ public class Interfaccia extends JFrame {
      sunriseText.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
      contentPane.add(sunriseText);
     
-     JLabel visibilità= new JLabel();
-     visibilità.setForeground(new Color(0, 0, 0));
-     visibilità.setBounds(274, 71, 96, 56);
-     visibilità.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
-     visibilità.setBackground(new Color(240, 240, 240, 100));
-     visibilità.setOpaque(true);
-     visibilità.setFont(new Font("Tahoma", Font.BOLD, 10));
-     visibilità.setHorizontalAlignment(SwingConstants.CENTER);
-     visibilità.setText("Visibilità");
-     visibilità.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
-     visibilità.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/fog.png")));
-	 visibilità.setHorizontalTextPosition(SwingConstants.CENTER);
-	 visibilità.setAlignmentY(Component.TOP_ALIGNMENT);
-	 visibilità.setVerticalAlignment(SwingConstants.TOP);
-	 contentPane.add(visibilità);
+     JLabel visibilita= new JLabel();
+     visibilita.setForeground(new Color(0, 0, 0));
+     visibilita.setBounds(274, 71, 96, 56);
+     visibilita.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+     visibilita.setBackground(new Color(240, 240, 240, 100));
+     visibilita.setOpaque(true);
+     visibilita.setFont(new Font("Tahoma", Font.BOLD, 10));
+     visibilita.setHorizontalAlignment(SwingConstants.CENTER);
+     visibilita.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
+     visibilita.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/fog2.png")));
+	 visibilita.setHorizontalTextPosition(SwingConstants.CENTER);
+	 visibilita.setAlignmentY(Component.TOP_ALIGNMENT);
+	 visibilita.setVerticalAlignment(SwingConstants.TOP);
+	 contentPane.add(visibilita);
      
      visibilitaText.setBounds(273, 133, 97, 24);
      visibilitaText.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -334,7 +322,7 @@ public class Interfaccia extends JFrame {
 	 
 	   JPanel weatherForecastPanel = new JPanel();
 	   weatherForecastPanel.setBounds(167, 264, 411, 109);
-	   weatherForecastPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	   
 	   weatherForecastPanel.setBackground(new Color(240, 240, 240, 100));
 	   weatherForecastPanel.setAlignmentX(CENTER_ALIGNMENT);
 	   weatherForecastPanel.setAlignmentY(CENTER_ALIGNMENT);
@@ -352,7 +340,7 @@ public class Interfaccia extends JFrame {
 	 lblLunedi.setSize(55, 65);
 	 lblLunedi.setText("Lunedi");
 	
-	 lblLunedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cloudy.png")));
+	 lblLunedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/clear.png")));
 
 	 lblLunedi.setHorizontalTextPosition(SwingConstants.CENTER);
 	  weatherForecastPanel.add(lblLunedi); 
@@ -377,7 +365,7 @@ public class Interfaccia extends JFrame {
 		 lblMartedi.setHorizontalAlignment(SwingConstants.CENTER);
 		 lblMartedi.setText("Martedi");
 	
-		 lblMartedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/msun.png")));
+		 lblMartedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cloudy.png")));
 		
 		 lblMartedi.setHorizontalTextPosition(SwingConstants.CENTER);
 		 lblMartedi.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -401,7 +389,7 @@ public class Interfaccia extends JFrame {
 			 lblMercoledi.setSize(55, 65);
 			 lblMercoledi.setText("Mercoledi");
 			
-			 lblMercoledi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/mparty.png")));
+			 lblMercoledi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/clear.png")));
 			 lblMercoledi.setHorizontalTextPosition(SwingConstants.CENTER);
 			 lblMercoledi.setAlignmentY(Component.TOP_ALIGNMENT);
 			  weatherForecastPanel.add(lblMercoledi); 
@@ -423,7 +411,7 @@ public class Interfaccia extends JFrame {
 				
 				 lblGiovedi.setHorizontalAlignment(SwingConstants.CENTER);
 				 lblGiovedi.setText("Giovedi");
-				 lblGiovedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/mrain.png")));
+				 lblGiovedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/partly.png")));
 				 lblGiovedi.setHorizontalTextPosition(SwingConstants.CENTER);
 				 lblGiovedi.setAlignmentY(Component.TOP_ALIGNMENT);
 				  weatherForecastPanel.add(lblGiovedi); 
@@ -442,7 +430,7 @@ public class Interfaccia extends JFrame {
 					 lblVenerdi.setBounds(232, 5, 55, 73);
 					 lblVenerdi.setHorizontalAlignment(SwingConstants.CENTER);
 					 lblVenerdi.setSize(55, 65);
-					 lblVenerdi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/msun.png")));
+					 lblVenerdi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/rain.png")));
 					 lblVenerdi.setText("Venerdi");
 					 lblVenerdi.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
 
@@ -466,7 +454,7 @@ public class Interfaccia extends JFrame {
 						 lblSabato.setBounds(290, 5, 55, 73);
 						 lblSabato.setVerticalTextPosition(SwingConstants.TOP);
 						 lblSabato.setHorizontalAlignment(SwingConstants.CENTER);
-						 lblSabato.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/partly.png")));
+						 lblSabato.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/storm.png")));
 						
 						 lblSabato.setSize(55, 65);
 						 
@@ -494,7 +482,7 @@ public class Interfaccia extends JFrame {
 							 lblDomenica.setHorizontalAlignment(SwingConstants.CENTER);
 							 lblDomenica.setText("Domenica");
 						
-							 lblDomenica.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/mrain.png")));
+							 lblDomenica.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/mparty.png")));
 
 							 lblDomenica.setHorizontalTextPosition(SwingConstants.CENTER);
 							 lblDomenica.setVerticalAlignment(SwingConstants.TOP);
@@ -530,6 +518,15 @@ public class Interfaccia extends JFrame {
 							  domoButton.setBounds(524, 13, 51, 45);
 							  domoButton.setLayout(null);
 							  contentPane.add(domoButton);
+							  
+							  domoButton.addActionListener(new ActionListener() {
+						            public void actionPerformed(ActionEvent e) {
+						                // Azione eseguita quando il pulsante viene premuto
+						                setVisible(false); // Nascondi la prima interfaccia
+						                InterfacciaDue interfacciaDue = new InterfacciaDue(); // Crea la seconda interfaccia
+						                interfacciaDue.setVisible(true); // Mostra la seconda interfaccia
+						            }
+						        });
 							  //PULSANTE CERCA PER IL METEO
 							  JButton searchButton = new JButton();
 							  searchButton.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
@@ -557,7 +554,23 @@ public class Interfaccia extends JFrame {
 								    }
 								});
         }
-        private void weatherData() {
+     // Metodo per impostare l'icona del tempo in base alla descrizione meteorologica
+        private void setWeatherIcon(String weatherDescription) {
+        	 JLabel weatherDataLabel = new JLabel();
+            // Mappatura delle descrizioni meteorologiche alle icone
+            HashMap<String, String> weatherIcons = new HashMap<>();
+            weatherIcons.put("nuvoloso", "cloudy-icon.png");
+            weatherIcons.put("soleggiato", "sunny-icon.png");
+            weatherIcons.put("piovoso", "rainy-icon.png");
+            // Aggiungi altre descrizioni meteorologiche se necessario
+            weatherDataLabel = new JLabel();
+            // Imposta l'icona del tempo
+            String iconPath = weatherIcons.getOrDefault(weatherDescription.toLowerCase(), "partly.png");
+            ImageIcon icon = new ImageIcon(iconPath);
+            weatherDataLabel.setIcon(icon);
+        }
+
+		private void weatherData() {
 			// TODO Auto-generated method stub
 			
 		}
@@ -575,7 +588,7 @@ public class Interfaccia extends JFrame {
 							        
 								    if (main != null && weatherArray != null && weatherArray.size() > 0) {
 								        
-								    	long id = (long) weatherData.get("id");
+								    	
 								    	double temp = (double) main.get("temp");
 								        double temp_min = (double) main.get("temp_min");
 								        double temp_max = (double) main.get("temp_max");
@@ -589,7 +602,7 @@ public class Interfaccia extends JFrame {
 								        long dt = (long) weatherData.get("dt");
 								        
 								     // Aggiorna le etichette con i valori appropriati
-								        updateTime(sunrise * 1000, sunset * 1000, dt * 1000);
+								        updateTime(sunrise * 1000, sunset * 1000);
 								        
 								        temperatureText.setText(String.valueOf(temp + " " + "°C"));
 								        maxText.setText(String.valueOf(temp_max + " " + "°C"));
@@ -598,10 +611,11 @@ public class Interfaccia extends JFrame {
 								        humidityText.setText(String.valueOf(humidity +  " " + "%"));
 								        weatherDescription.setText(description);
 								        windspeedText.setText(String.valueOf(windSpeed + " " + "m/h"));
+								       // sunriseText.setText(String.valueOf(sunrise*1000));
+								       // sunsetText.setText(String.valueOf(sunset*1000));
+								       // CurrentDateText.setText(String.valueOf(dt));
 								        visibilitaText.setText(String.valueOf(visibility + " " + "m"));
-								        weatherDataLabel.setText(String.valueOf(dt));
 								        
-								        //gestione degli errori
 								    } else {
 								        temperatureText.setText("Errore");
 								        maxText.setText("Errore");
@@ -617,27 +631,45 @@ public class Interfaccia extends JFrame {
 								    }
 								}
 								
-								private void updateTime(long sunrise, long sunset, long dt) {
+								private void updateTime(long sunrise, long sunset) {
 									
-									 TimeZone.setDefault(TimeZone.getTimeZone("UTC+1"));
-							        // Conversione di timestamp in oggetti Date
+									 TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+							        // Converti i timestamp in oggetti Date
 							        Date sunriseDate = new Date(sunrise * 1000);
 							        Date sunsetDate = new Date(sunset * 1000);
-							        Date dtDate = new Date(dt * 1000);
+							   
 							  
-								// Formattazione delle date in stringhe leggibili
+								// Formatta le date in stringhe leggibili
 						        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 						        String formattedSunrise = dateFormat.format(sunriseDate);
 						        String formattedSunset = dateFormat.format(sunsetDate);
-						        String formattedDt = dateFormat.format(dtDate);
+						  
 								
 						        sunriseText.setText(" " + formattedSunrise);
 						        sunsetText.setText(" " + formattedSunset);
-						        CurrentDateText.setText(" " + formattedDt);
+						     
+					
 								
+								// Inizializza il timer per aggiornare la data e l'orario ogni secondo
+						        Timer timer = new Timer(1000, e -> updateDateTime());
+						        timer.start();
+
+						        setVisible(true);
 						    }
-								
-							    
+
+						    // Metodo per aggiornare la data e l'orario corrente
+						    private void updateDateTime() {
+						        // Ottieni la data e l'orario correnti
+						        Date currentDate = new Date();
+						        // Formatta la data e l'orario correnti
+						        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+						        // Imposta il fuso orario a GMT
+						        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+						        String formattedDateTime = dateFormat.format(currentDate);
+						        // Aggiorna il testo del currentDateLabel
+						        CurrentDateText.setText(" " + formattedDateTime);
+						    }
+
 
 								    public static void main(String[] args) {
 								        SwingUtilities.invokeLater(() -> {

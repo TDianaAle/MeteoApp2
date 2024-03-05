@@ -1,22 +1,19 @@
 package com.meteoapp2;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
@@ -24,8 +21,9 @@ public class InterfacciaDue extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel Time;
-	private JLabel Date;
+	private JLabel weatherDataLabel;
+	private JLabel weatherDescription;
+	private JLabel temperatureText;
 	
 
 	public InterfacciaDue() {
@@ -43,45 +41,79 @@ public class InterfacciaDue extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Domotica");
-		lblNewLabel.setBounds(434, 17, 106, 97);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/cameras2.jpg")));
+		lblNewLabel.setBounds(461, 33, 109, 99);
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(161, 144, 141, 109);
+		lblNewLabel_1.setBounds(167, 157, 141, 109);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/alarm.jpg")));
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(288, 17, 141, 100);
+		lblNewLabel_2.setBounds(306, 25, 141, 114);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/laundry.jpg")));
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setBounds(172, 18, 121, 100);
+		lblNewLabel_3.setBounds(178, 32, 121, 100);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/kitchen.jpg")));
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setBounds(289, 148, 141, 100);
+		lblNewLabel_5.setBounds(305, 154, 145, 115);
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bathroom.png")));
 		contentPane.add(lblNewLabel_5);
 		
-		JLabel Weather = new JLabel("");
-		Weather.setOpaque(true);
-		Weather.setBackground(new Color(255, 255, 255));
-		Weather.setHorizontalAlignment(SwingConstants.CENTER);
-		Weather.setBounds(54, 17, 101, 100);
-		Weather.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/clear.png")));
-		contentPane.add(Weather);
+		 JLabel weatherDataLabel = new JLabel();
+	        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
+	        weatherDataLabel.setToolTipText("");
+	        weatherDataLabel.setBounds(26, 32, 134, 230);
+	        weatherDataLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	        weatherDataLabel.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
+	        weatherDataLabel.setBackground(new Color(255, 255, 255, 100));
+	        weatherDataLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
+	  
+	        weatherDataLabel.setAlignmentY(Component.TOP_ALIGNMENT);
+	        contentPane.add(weatherDataLabel);
+	             weatherDataLabel.setLayout(null);
+	        
+
+	             
+	             // Inizializzazione delle variabili
+	             temperatureText = new JLabel();
+	            
+	             temperatureText.setVerticalTextPosition(SwingConstants.BOTTOM);
+	             temperatureText.setText("17 °C");
+	             temperatureText.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/clear.png")));
+	             temperatureText.setBounds(4, 2, 130, 148);
+	             weatherDataLabel.add(temperatureText);
+	             temperatureText.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
+	        temperatureText.setBackground(new Color(255, 255, 255, 100));
+	        temperatureText.setHorizontalTextPosition(SwingConstants.CENTER);
+	        temperatureText.setHorizontalAlignment(SwingConstants.CENTER);
+	        temperatureText.setFont(new Font("Tahoma", Font.BOLD, 24));
+	        weatherDescription = new JLabel();
+	        weatherDescription.setBounds(-1, 157, 137, 25);
+	        weatherDataLabel.add(weatherDescription);
+	        weatherDescription.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
+	        weatherDescription.setForeground(new Color(0, 0, 0));
+	        weatherDescription.setHorizontalTextPosition(SwingConstants.CENTER);
+	        weatherDescription.setHorizontalAlignment(SwingConstants.CENTER);
+	        weatherDescription.setBackground(new Color(255, 255, 255, 100));
+	        weatherDescription.setLayout(null);
+	        
+	        weatherDescription.setFont(new Font("Dialog", Font.BOLD, 12));
+	        weatherDescription.setText("sereno");
 		
-		Weather.addMouseListener(new MouseListener() {
+		weatherDataLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
@@ -94,12 +126,12 @@ public class InterfacciaDue extends JFrame {
                 setLocationRelativeTo(null);
                 interfaccia.setVisible(true);
             }
-
-			public void mouseClicked1(MouseEvent e) {
+            @Override
+			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				 // Cambia il cursore quando il mouse entra nel pulsante
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
-
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -112,12 +144,7 @@ public class InterfacciaDue extends JFrame {
 				
 			}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				 // Cambia il cursore quando il mouse entra nel pulsante
-				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			}
+			
 
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -128,57 +155,28 @@ public class InterfacciaDue extends JFrame {
 			}
         });
 		
-		JLabel Date = new JLabel("");
-		Date.setOpaque(true);
-		Date.setBackground(new Color(255, 255, 255));
-		Date.setBounds(51, 150, 103, 43);
-		contentPane.add(Date);
-		
-		JLabel Time = new JLabel("");
-		Time.setOpaque(true);
-		Time.setBackground(new Color(255, 255, 255));
-		Time.setBounds(50, 201, 104, 43);
-		contentPane.add(Time);
-		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bedroom2.jpg")));
-		lblNewLabel_4.setBounds(436, 149, 104, 99);
-		contentPane.add(lblNewLabel_4);
+		JLabel bedroom = new JLabel("");
+	 bedroom.setHorizontalAlignment(SwingConstants.CENTER);
+		bedroom.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bedroom2.jpg")));
+		bedroom.setBounds(459, 150, 112, 121);
+		contentPane.add(bedroom);
 	}
 
-	public  String getCurrentDateTime() {
-		
-		Date = new JLabel();
-		Time = new JLabel();
-		
-        // Ottieni data e orario attuali
-        LocalDateTime currentDateTime = LocalDateTime.now();
-
-        // Formatta data e orario in stringhe separate
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        // Formatta data e orario attuali nelle stringhe separate
-        String formattedDate = currentDateTime.format(dateFormatter);
-        String formattedTime = currentDateTime.format(timeFormatter);
-
-        // Ritorna la concatenazione di data e orario
-        return formattedDate + " " + formattedTime;
-	}
-
+	
 	public  void main(String[] args) {
-        // imposto l'orario e la data corrente nelle relative label
-        String currentDateTime = getCurrentDateTime();{
-
-        // Imposta la data attuale nella label CurrentDateText
-        Date.setText(currentDateTime.split(" ")[0]);
-
-        // Imposta l'orario attuale nella label CurrentTimeText
-         Time.setText(currentDateTime.split(" ")[1]);
       
 
 SwingUtilities.invokeLater(() -> new Interfaccia());
         }
+
+
+	public JLabel getWeatherDataLabel() {
+		return weatherDataLabel;
 	}
-}
+
+
+	public void setWeatherDataLabel(JLabel weatherDataLabel) {
+		this.weatherDataLabel = weatherDataLabel;
+	}
+	}
+
