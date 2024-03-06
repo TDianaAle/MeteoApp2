@@ -47,7 +47,6 @@ public class InterfacciaDue extends JFrame {
 		
 		JLabel telecamere = new JLabel("");
 		telecamere.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/cameras2.jpg")));
-	//	lblNewLabel.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/cameras2.jpg")));
 		telecamere.setBounds(461, 33, 109, 99);
 		telecamere.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 20));
 		telecamere.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,34 +167,6 @@ public class InterfacciaDue extends JFrame {
 		contentPane.add(camera);
 	}
 
-	private void updateUI(JSONObject weatherData) {
-		
-		
-	    JSONObject main = (JSONObject) weatherData.get("main");
-	    JSONArray weatherArray = (JSONArray) weatherData.get("weather");
-	    JSONObject weatherObject = (JSONObject) weatherArray.get(0);
-	       
-    	JSONObject wind = (JSONObject) weatherData.get("wind");
-
-    	JSONObject sys = (JSONObject) weatherData.get("sys");
-        
-	    if (main != null && weatherArray != null && weatherArray.size() > 0) {
-	        
-	    	
-	    	double temp = (double) main.get("temp");
-	    	String description = (String) weatherObject.get("description");
-	    	
-	    	// Aggiorna le etichette con i valori appropriati
-	    	
-	        temperatureText.setText(String.valueOf(temp + " " + "°C"));
-	        weatherDescription.setText(description);
-	    } else {
-	        temperatureText.setText("Errore");
-	        weatherDescription.setText("Errore");
-	        
-	    }
-	}
-	    
 	public  void main(String[] args) {
       
 

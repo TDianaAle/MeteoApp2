@@ -66,10 +66,11 @@ public class Interfaccia extends JFrame {
         maxText = new JLabel();
         minText = new JLabel();
         pressioneText = new JLabel();
+        weatherData();
         CurrentDateText = new JLabel();
         CurrentDateText.setHorizontalTextPosition(SwingConstants.CENTER);
         CurrentDateText.setText("<html><center>06-12-2014 <br> 14:36:00 </center></html>");
-        CurrentDateText.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/bcksunny.jpg")));
+        CurrentDateText.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
         CurrentDateText.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
         windspeedText = new JLabel();
         sunsetText = new JLabel();
@@ -85,7 +86,7 @@ public class Interfaccia extends JFrame {
         
         //aggiunta delle label per le icone e descrizione di esse; ad ogni label appartiene una seconda label.Text dove verannò visualizzati i dati chiamati dall'API
         JLabel weatherDataLabel = new JLabel();
-        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/bcksunny.jpg")));
+        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
         weatherDataLabel.setToolTipText("");
         weatherDataLabel.setBounds(20, 71, 130, 184);
         weatherDataLabel.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
@@ -125,7 +126,7 @@ public class Interfaccia extends JFrame {
         weatherDescription.setText("sereno");
         
         CurrentDateText.setBounds(18, 265, 133, 111);
-        CurrentDateText.setFont(new Font("Tahoma", Font.BOLD, 12));
+        CurrentDateText.setFont(new Font("Tahoma", Font.BOLD, 14));
         CurrentDateText.setHorizontalAlignment(SwingConstants.CENTER);
         CurrentDateText.setBackground(new Color(240, 240, 240, 100));
         contentPane.add(CurrentDateText);
@@ -364,7 +365,7 @@ public class Interfaccia extends JFrame {
 		 lblMartedi.setHorizontalAlignment(SwingConstants.CENTER);
 		 lblMartedi.setText("Martedi");
 	
-		 lblMartedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/clear.png")));
+		 lblMartedi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cloudy.png")));
 		
 		 lblMartedi.setHorizontalTextPosition(SwingConstants.CENTER);
 		 lblMartedi.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -429,7 +430,7 @@ public class Interfaccia extends JFrame {
 					 lblVenerdi.setBounds(232, 5, 55, 73);
 					 lblVenerdi.setHorizontalAlignment(SwingConstants.CENTER);
 					 lblVenerdi.setSize(55, 65);
-					 lblVenerdi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/clear.png")));
+					 lblVenerdi.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/rain.png")));
 					 lblVenerdi.setText("Venerdi");
 					 lblVenerdi.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
 
@@ -554,26 +555,15 @@ public class Interfaccia extends JFrame {
 								});
         }
      // Metodo per impostare l'icona del tempo in base alla descrizione meteorologica
-        private void setWeatherIcon(String weatherDescription) {
-        	 JLabel weatherDataLabel = new JLabel();
-            // Mappatura delle descrizioni meteorologiche alle icone
-            HashMap<String, String> weatherIcons = new HashMap<>();
-            weatherIcons.put("nuvoloso", "cloudy-icon.png");
-            weatherIcons.put("soleggiato", "sunny-icon.png");
-            weatherIcons.put("piovoso", "rainy-icon.png");
-            // Aggiungi altre descrizioni meteorologiche se necessario
-            weatherDataLabel = new JLabel();
-            // Imposta l'icona del tempo
-            String iconPath = weatherIcons.getOrDefault(weatherDescription.toLowerCase(), "partly.png");
-            ImageIcon icon = new ImageIcon(iconPath);
-            weatherDataLabel.setIcon(icon);
-        }
+       
 
-	
-		
+		private void weatherData() {
+			// TODO Auto-generated method stub
+			
+		}
 		//METODO PER ESTRARRE I DATI DAL JSON, FORMATO SIA DA UN ARRAY E PIU' OGGETTI
 								private void updateUI(JSONObject weatherData) {
-									
+
 			
 								    JSONObject main = (JSONObject) weatherData.get("main");
 								    JSONArray weatherArray = (JSONArray) weatherData.get("weather");
@@ -586,7 +576,7 @@ public class Interfaccia extends JFrame {
 								    if (main != null && weatherArray != null && weatherArray.size() > 0) {
 								        
 								    	
-								    	double temp = (double) main.get("temp");
+								    	long temp = (long) main.get("temp");
 								        double temp_min = (double) main.get("temp_min");
 								        double temp_max = (double) main.get("temp_max");
 								        long pressure = (long) main.get("pressure");
@@ -594,9 +584,9 @@ public class Interfaccia extends JFrame {
 								        String description = (String) weatherObject.get("description");
 								        double windSpeed = (double) wind.get("speed");
 								        long sunrise = (long) sys.get("sunrise");
-								        long sunset = (long) sys.get("sunset");	
+								        long sunset = (long) sys.get("sunset");		
 								        long visibility = (long) weatherData.get("visibility");
-								        
+								      
 								        
 								     // Aggiorna le etichette con i valori appropriati
 								        updateTime(sunrise * 1000, sunset * 1000);
