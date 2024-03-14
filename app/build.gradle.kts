@@ -13,10 +13,19 @@ dependencies {
     implementation("org.openjfx:javafx-media:16")
     implementation("org.json:json:20210307")
     testImplementation("junit:junit:4.12")
+    
 }
 
-application {
-    mainClass.set("com.meteoapp2.MeteoApp")
+sourceSets {
+    main {
+        resources {
+            srcDirs("src/main/resources/assets")
+        }
 }
+}
+application {
+    mainClass.set("com.meteoapp2.Interfaccia")
+}
+
 
    

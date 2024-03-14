@@ -15,8 +15,15 @@ dependencies {
     testImplementation("junit:junit:4.12")
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDirs("src/main/resources/assets")
+        }
+}
+}
 application {
-    mainClass.set("com.meteoapp2.MeteoApp")
+    mainClass.set("com.meteoapp2.Interfaccia")
 }
 
    
