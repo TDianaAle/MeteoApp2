@@ -15,6 +15,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 
 public class InterfacciaDue extends JFrame {
@@ -27,6 +28,7 @@ public class InterfacciaDue extends JFrame {
 	
 
 	public InterfacciaDue() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InterfacciaDue.class.getResource("/assets/mhome.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -35,7 +37,7 @@ public class InterfacciaDue extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(32, 178, 170));
-		contentPane.setBorder(new LineBorder(new Color(152, 251, 152), 5));
+		contentPane.setBorder(new LineBorder(new Color(239, 239, 239), 5, true));
 		setLocationRelativeTo(null);
 
 		setContentPane(contentPane);
@@ -78,7 +80,7 @@ public class InterfacciaDue extends JFrame {
 	        weatherDataLabel.setToolTipText("");
 	        weatherDataLabel.setBounds(26, 32, 134, 230);
 	        weatherDataLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	        weatherDataLabel.setBorder(new LineBorder(new Color(152, 251, 152), 5, true));
+	        weatherDataLabel.setBorder(new LineBorder(new Color(239, 239, 239), 5, true));
 	        weatherDataLabel.setBackground(new Color(255, 255, 255, 100));
 	        weatherDataLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
 	  
@@ -90,6 +92,7 @@ public class InterfacciaDue extends JFrame {
 	             
 	             // Inizializzazione delle variabili
 	             temperatureText = new JLabel();
+	             temperatureText.setForeground(new Color(255, 255, 255));
 	            
 	             temperatureText.setVerticalTextPosition(SwingConstants.BOTTOM);
 	             temperatureText.setText("17 °C");
@@ -105,13 +108,13 @@ public class InterfacciaDue extends JFrame {
 	        weatherDescription.setBounds(-1, 157, 137, 25);
 	        weatherDataLabel.add(weatherDescription);
 	        weatherDescription.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
-	        weatherDescription.setForeground(new Color(0, 0, 0));
+	        weatherDescription.setForeground(new Color(255, 255, 255));
 	        weatherDescription.setHorizontalTextPosition(SwingConstants.CENTER);
 	        weatherDescription.setHorizontalAlignment(SwingConstants.CENTER);
 	        weatherDescription.setBackground(new Color(255, 255, 255, 100));
 	        weatherDescription.setLayout(null);
 	        
-	        weatherDescription.setFont(new Font("Dialog", Font.BOLD, 12));
+	        weatherDescription.setFont(new Font("Dialog", Font.BOLD, 14));
 	        weatherDescription.setText("sereno");
 		
 		weatherDataLabel.addMouseListener(new MouseListener() {
@@ -163,18 +166,21 @@ public class InterfacciaDue extends JFrame {
 		contentPane.add(camera);
 		
 		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 		lblNewLabel.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/med-ext.png")));
-		lblNewLabel.setBounds(26, 316, 211, 44);
+		lblNewLabel.setBounds(26, 316, 160, 44);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 		lblNewLabel_2.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/sec-ext.png")));
-		lblNewLabel_2.setBounds(247, 316, 211, 44);
+		lblNewLabel_2.setBounds(215, 316, 218, 44);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 		lblNewLabel_3.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/buzz-ext.png")));
-		lblNewLabel_3.setBounds(468, 312, 109, 48);
+		lblNewLabel_3.setBounds(461, 316, 109, 44);
 		contentPane.add(lblNewLabel_3);
 	}
 

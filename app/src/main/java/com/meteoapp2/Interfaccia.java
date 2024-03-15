@@ -26,6 +26,7 @@ import javax.swing.border.MatteBorder;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import java.awt.Toolkit;
 
 public class Interfaccia extends JFrame {
 	
@@ -47,6 +48,7 @@ public class Interfaccia extends JFrame {
 	
 
 	public Interfaccia() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Interfaccia.class.getResource("/assets/partly.png")));
 
 		setFont(new Font("Dialog", Font.BOLD, 10));
 		setResizable(false);
@@ -61,8 +63,8 @@ public class Interfaccia extends JFrame {
         //inizializzazione dei componenti dell'interfaccia 
         private void initComponents() {
         JPanel contentPane = new JPanel();
-        contentPane.setBorder(new LineBorder(new Color(147, 112, 219), 5));
-        contentPane.setBackground(new Color(0, 250, 154));
+        contentPane.setBorder(new LineBorder(new Color(239, 239, 239), 5));
+        contentPane.setBackground(new Color(0, 191, 191));
         maxText = new JLabel();
         minText = new JLabel();
         pressioneText = new JLabel();
@@ -71,7 +73,7 @@ public class Interfaccia extends JFrame {
         CurrentDateText.setHorizontalTextPosition(SwingConstants.CENTER);
         CurrentDateText.setText("<html><center>06-12-2014 <br> 14:36:00 </center></html>");
         CurrentDateText.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
-        CurrentDateText.setBorder(new LineBorder(new Color(128, 128, 255), 5, true));
+        CurrentDateText.setBorder(new LineBorder(new Color(239, 239, 239), 5, true));
         windspeedText = new JLabel();
         sunsetText = new JLabel();
         sunriseText = new JLabel();
@@ -89,7 +91,7 @@ public class Interfaccia extends JFrame {
         weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
         weatherDataLabel.setToolTipText("");
         weatherDataLabel.setBounds(20, 71, 130, 184);
-        weatherDataLabel.setBorder(new LineBorder(new Color(128, 128, 255), 5, true));
+        weatherDataLabel.setBorder(new LineBorder(new Color(239, 239, 239), 5, true));
         weatherDataLabel.setBackground(new Color(255, 255, 255, 100));
         weatherDataLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
   
@@ -133,17 +135,12 @@ public class Interfaccia extends JFrame {
  
         JLabel min = new JLabel();
         min.setBounds(167, 71, 97, 56);
-        min.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
-        min.setMaximumSize(new Dimension(50, 70));
-        min.setPreferredSize(new Dimension(70, 50));
-        min.setVerticalTextPosition(SwingConstants.TOP);
-        min.setVerticalAlignment(SwingConstants.BOTTOM);
+        min.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
         min.setOpaque(true);
         min.setHorizontalTextPosition(SwingConstants.CENTER);
         min.setHorizontalAlignment(SwingConstants.CENTER);
         min.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/hot.png")));
         min.setBackground(new Color(255, 255, 255, 100));
-        min.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
         		contentPane.add(min);
         		
         		 maxText.setBounds(167, 134, 98, 24);
@@ -156,15 +153,13 @@ public class Interfaccia extends JFrame {
         		 contentPane.add(maxText);
  
         		JLabel max = new JLabel();
-        		max.setVerticalAlignment(SwingConstants.BOTTOM);
-        		max.setBounds(166, 164, 99, 57);
-        		max.setVerticalTextPosition(SwingConstants.TOP);
         		max.setOpaque(true);
+        		max.setBounds(166, 164, 99, 57);
         		max.setHorizontalTextPosition(SwingConstants.CENTER);
         		max.setHorizontalAlignment(SwingConstants.CENTER);
         		max.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cold.jpeg")));
         		max.setBackground(new Color(255, 255, 255, 100));
-        		max.setBorder(new LineBorder(new Color(128, 128, 255), 1, true));
+        		max.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
         		contentPane.add(max);
         		
         		//JLabel maxText = new JLabel();
@@ -189,7 +184,7 @@ public class Interfaccia extends JFrame {
 
 	 windspeed.setHorizontalTextPosition(SwingConstants.CENTER);
 	 windspeed.setAlignmentY(Component.TOP_ALIGNMENT);
-	 windspeed.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+	 windspeed.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
     contentPane.add(windspeed);
 
      windspeedText.setBounds(479, 134, 98, 24);
@@ -214,7 +209,7 @@ public class Interfaccia extends JFrame {
 
 	 lblhumidity.setHorizontalTextPosition(SwingConstants.CENTER);
 	 lblhumidity.setAlignmentY(Component.TOP_ALIGNMENT);
-	 lblhumidity.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+	 lblhumidity.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
      contentPane.add(lblhumidity);
      
      humidityText.setBounds(272, 228, 98, 24);
@@ -236,7 +231,7 @@ public class Interfaccia extends JFrame {
      Sunset.setHorizontalTextPosition(SwingConstants.CENTER);
      Sunset.setAlignmentY(Component.TOP_ALIGNMENT);
      Sunset.setVerticalAlignment(SwingConstants.TOP);
-     Sunset.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+     Sunset.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
     contentPane.add(Sunset);
      
      sunsetText.setBounds(480, 228, 98, 23);
@@ -259,7 +254,7 @@ public class Interfaccia extends JFrame {
 
 	 pressione.setHorizontalTextPosition(SwingConstants.CENTER);
 	 pressione.setAlignmentY(Component.TOP_ALIGNMENT);
-	 pressione.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+	 pressione.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
      contentPane.add(pressione);
      
      pressioneText.setBounds(379, 134, 94, 24);
@@ -282,7 +277,7 @@ public class Interfaccia extends JFrame {
      
 	 Sunrise.setHorizontalTextPosition(SwingConstants.CENTER);
 	 Sunrise.setAlignmentY(Component.TOP_ALIGNMENT);
-	 Sunrise.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+	 Sunrise.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
      contentPane.add(Sunrise);
      
      sunriseText.setBounds(377, 228, 97, 24);
@@ -296,7 +291,7 @@ public class Interfaccia extends JFrame {
      JLabel visibilita= new JLabel();
      visibilita.setForeground(new Color(0, 0, 0));
      visibilita.setBounds(274, 71, 96, 56);
-     visibilita.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 255)));
+     visibilita.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
      visibilita.setBackground(new Color(240, 240, 240, 100));
      visibilita.setOpaque(true);
      visibilita.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -327,7 +322,7 @@ public class Interfaccia extends JFrame {
 	   weatherForecastPanel.setAlignmentX(CENTER_ALIGNMENT);
 	   weatherForecastPanel.setAlignmentY(CENTER_ALIGNMENT);
 	 
-       weatherForecastPanel.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
+       weatherForecastPanel.setBorder(new LineBorder(new Color(239, 239, 239), 5, true));
        contentPane.add(weatherForecastPanel);
        
 	 weatherForecastPanel.setLayout(null);
@@ -498,7 +493,7 @@ public class Interfaccia extends JFrame {
 							  weatherForecastPanel.add(domenicaText);
 							  
 							  JTextField searchTextField = new JTextField();
-							  searchTextField.setBorder(new LineBorder(new Color(128, 128, 255), 4, true));
+							  searchTextField.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 							  searchTextField.setBounds(275, 13, 173, 44);
 							  contentPane.add(searchTextField);
 							  
@@ -513,11 +508,11 @@ public class Interfaccia extends JFrame {
 					                interfacciaDue.setVisible(true);
 							  	}
 							  });
-							  domoButton.setBorder(new LineBorder(new Color(128, 128, 255), 4, true));
+							  domoButton.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 							  domoButton.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/mhome.png")));
 							  domoButton.setBounds(524, 13, 51, 45);
 							  domoButton.setLayout(null);
-							  setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+							  domoButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 							  contentPane.add(domoButton);
 							  
 							  domoButton.addActionListener(new ActionListener() {
@@ -530,12 +525,13 @@ public class Interfaccia extends JFrame {
 						        });
 							  //PULSANTE CERCA PER IL METEO
 							  JButton searchButton = new JButton();
-							  searchButton.setBackground(new Color(32, 178, 170, 100));
-							  searchButton.setBorder(new LineBorder(new Color(128, 128, 255), 4, true));
+							  searchButton.setBackground(new Color(255, 255, 255));
+							  searchButton.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 						
         
 							  searchButton.setBounds(459, 13, 53, 45);
 							  searchButton.setHorizontalTextPosition(SwingConstants.LEFT);
+							  searchButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 							  contentPane.add(searchButton);
 							  searchButton.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/search.png")));
 							
@@ -673,6 +669,5 @@ public class Interfaccia extends JFrame {
 								            interfaccia.setVisible(true);
 								        });
 								    }
-									
-									}
+}
 								
