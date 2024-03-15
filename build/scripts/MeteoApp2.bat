@@ -72,7 +72,7 @@ set CLASSPATH=%APP_HOME%\lib\MeteoApp2.jar;%APP_HOME%\lib\json-simple-1.1.jar;%A
 
 
 @rem Execute MeteoApp2
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %METEO_APP2_OPTS%  -classpath "%CLASSPATH%" com.meteoapp2.MeteoApp %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %METEO_APP2_OPTS%  -classpath "%CLASSPATH%" com.meteoapp2.Interfaccia %*
 
 :end
 @rem End local scope for the variables with windows NT shell

@@ -2,7 +2,6 @@ package com.meteoapp2;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import javax.swing.JLabel;
@@ -35,15 +34,15 @@ public class InterfacciaDue extends JFrame {
 		setTitle("Domoteo");
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(104, 193, 236));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(32, 178, 170));
+		contentPane.setBorder(new LineBorder(new Color(152, 251, 152), 5));
 		setLocationRelativeTo(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel telecamere = new JLabel("");
-		telecamere.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/cameras2.jpg"));
+		telecamere.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/cameras2.jpg")));
 		telecamere.setBounds(461, 33, 109, 99);
 		telecamere.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 20));
 		telecamere.setHorizontalAlignment(SwingConstants.CENTER);
@@ -52,34 +51,34 @@ public class InterfacciaDue extends JFrame {
 		JLabel alarme = new JLabel("");
 		alarme.setBounds(167, 157, 141, 109);
 		alarme.setHorizontalAlignment(SwingConstants.CENTER);
-		alarme.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/alarm.jpg"));
+		alarme.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/alarm.jpg")));
 		contentPane.add(alarme);
 		
 		JLabel lavanderia = new JLabel("");
 		lavanderia.setBounds(306, 25, 141, 114);
 		lavanderia.setHorizontalAlignment(SwingConstants.CENTER);
-		lavanderia.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/laundry.jpg"));
+		lavanderia.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/laundry.jpg")));
 		contentPane.add(lavanderia);
 		
 		JLabel cucina = new JLabel("");
 		cucina.setBounds(178, 32, 121, 100);
 		cucina.setHorizontalAlignment(SwingConstants.CENTER);
-		cucina.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/kitchen.jpg"));
+		cucina.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/kitchen.jpg")));
 		contentPane.add(cucina);
 		
 		JLabel bagno = new JLabel("");
 		bagno.setBounds(305, 154, 145, 115);
 		bagno.setHorizontalAlignment(SwingConstants.CENTER);
-		bagno.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/bathroom.png"));
+		bagno.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bathroom.png")));
 		contentPane.add(bagno);
 		
 		 JLabel weatherDataLabel = new JLabel();
-		 weatherDataLabel.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/bcksunny.jpg"));
+		 weatherDataLabel.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/background.jpg")));
 	     //   weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
 	        weatherDataLabel.setToolTipText("");
 	        weatherDataLabel.setBounds(26, 32, 134, 230);
 	        weatherDataLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-	        weatherDataLabel.setBorder(new LineBorder(new Color(128, 128, 255), 2, true));
+	        weatherDataLabel.setBorder(new LineBorder(new Color(152, 251, 152), 5, true));
 	        weatherDataLabel.setBackground(new Color(255, 255, 255, 100));
 	        weatherDataLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 18));
 	  
@@ -159,22 +158,22 @@ public class InterfacciaDue extends JFrame {
 		
 		JLabel camera = new JLabel("");
 	 camera.setHorizontalAlignment(SwingConstants.CENTER);
-		camera.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/bedroom2.jpg"));
+		camera.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bedroom2.jpg")));
 		camera.setBounds(459, 150, 112, 121);
 		contentPane.add(camera);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/med-ext.png"));
+		lblNewLabel.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/med-ext.png")));
 		lblNewLabel.setBounds(26, 316, 211, 44);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/sec-ext.png"));
+		lblNewLabel_2.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/sec-ext.png")));
 		lblNewLabel_2.setBounds(247, 316, 211, 44);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/buzz-ext.png"));
+		lblNewLabel_3.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/buzz-ext.png")));
 		lblNewLabel_3.setBounds(468, 312, 109, 48);
 		contentPane.add(lblNewLabel_3);
 	}
