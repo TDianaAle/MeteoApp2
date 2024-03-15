@@ -636,7 +636,7 @@ public class Interfaccia extends JFrame {
 
 							        setVisible(true);
 							        
-									 TimeZone.setDefault(TimeZone.getTimeZone("CET"));
+									 TimeZone.setDefault(TimeZone.getTimeZone("GTM+1"));
 							        // Converti i timestamp in oggetti Date
 							        Date sunriseDate = new Date(sunrise * 1000);
 							        Date sunsetDate = new Date(sunset * 1000);

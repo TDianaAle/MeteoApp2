@@ -1,7 +1,7 @@
-plugins {
+
+plugins
     id("application")
     id("java")
-
 }
 
 repositories {
@@ -22,6 +22,12 @@ sourceSets {
             srcDirs("src/main/resources/assets")
         }
 }
+}
+tasks {
+    withType<JavaCompile>().configureEach { options.encoding = "UTF-8" }
+    withType<JavaExec>().configureEach { defaultCharacterEncoding = "UTF-8" }
+    withType<Javadoc>().configureEach { options.encoding = "UTF-8" }
+    withType<Test>().configureEach { defaultCharacterEncoding = "UTF-8" }
 }
 application {
     mainClass.set("com.meteoapp2.Interfaccia")

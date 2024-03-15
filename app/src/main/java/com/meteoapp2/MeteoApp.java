@@ -16,7 +16,7 @@ public class MeteoApp {
 
     public static JSONObject getWeatherData(String cityName) {
         try {
-            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(cityName, "UTF-8") + "&lang=it&units=metric&APPID=" + "e58f4fd59c7b9967eebedc1d199162db";
+            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(cityName, "UTF-8") + "&lang=it&units=metric&APPID=" + URLEncoder.encode("e58f4fd59c7b9967eebedc1d199162db", "UTF-8");
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");

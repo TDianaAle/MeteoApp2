@@ -5,3 +5,4 @@ rootProject.name = "MeteoApp2"
 include("app")
 
 // Aggiungi ulteriori inclusioni se necessario
+
