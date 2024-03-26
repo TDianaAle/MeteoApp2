@@ -3,14 +3,11 @@ package com.meteoapp2;
  import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,10 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.awt.Toolkit;
@@ -34,6 +29,7 @@ public class Interfaccia extends JFrame {
 	 * 
 	 */
 	public static final long serialVersionUID = 1L;
+	
 	public JLabel temperatureText;
 	public JLabel weatherDescription;
 	public JLabel maxText;
@@ -45,9 +41,12 @@ public class Interfaccia extends JFrame {
 	public JLabel sunriseText;
 	public JLabel humidityText; 
 	private JLabel visibilitaText;
-	
+	public JButton domoButton;
+	public JTextField searchTextField;
 
-	public Interfaccia() {
+
+	public Interfaccia(){
+	
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Interfaccia.class.getResource("/assets/partly.png")));
 
 		setFont(new Font("Dialog", Font.BOLD, 10));
@@ -68,7 +67,6 @@ public class Interfaccia extends JFrame {
         maxText = new JLabel();
         minText = new JLabel();
         pressioneText = new JLabel();
-        weatherData();
         CurrentDateText = new JLabel();
         CurrentDateText.setHorizontalTextPosition(SwingConstants.CENTER);
         CurrentDateText.setText("<html><center>06-12-2014 <br> 14:36:00 </center></html>");
@@ -88,7 +86,7 @@ public class Interfaccia extends JFrame {
         
         //aggiunta delle label per le icone e descrizione di esse; ad ogni label appartiene una seconda label.Text dove verannò visualizzati i dati chiamati dall'API
         JLabel weatherDataLabel = new JLabel();
-        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/backsunny.jpg")));
+        weatherDataLabel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/bcksunny.jpg")));
         weatherDataLabel.setToolTipText("");
         weatherDataLabel.setBounds(20, 71, 130, 184);
         weatherDataLabel.setBorder(new LineBorder(new Color(239, 239, 239), 5, true));
@@ -132,11 +130,22 @@ public class Interfaccia extends JFrame {
         CurrentDateText.setHorizontalAlignment(SwingConstants.CENTER);
         CurrentDateText.setBackground(new Color(240, 240, 240, 100));
         contentPane.add(CurrentDateText);
+        
+            // Ottieni la data e l'ora correnti
+            Date currentDate = new Date();
+            
+            // Formatta la data e l'ora correnti
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
+            String formattedDateTime = dateFormat.format(currentDate);
+            
+            // Imposta il testo del label con la data e l'ora correnti
+            CurrentDateText.setText(formattedDateTime);
+        
  
         JLabel min = new JLabel();
+        min.setOpaque(true);
         min.setBounds(167, 71, 97, 56);
         min.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
-        min.setOpaque(true);
         min.setHorizontalTextPosition(SwingConstants.CENTER);
         min.setHorizontalAlignment(SwingConstants.CENTER);
         min.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/hot.png")));
@@ -154,10 +163,10 @@ public class Interfaccia extends JFrame {
  
         		JLabel max = new JLabel();
         		max.setOpaque(true);
-        		max.setBounds(166, 164, 99, 57);
+        		max.setBounds(165, 165, 99, 56);
         		max.setHorizontalTextPosition(SwingConstants.CENTER);
         		max.setHorizontalAlignment(SwingConstants.CENTER);
-        		max.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cold.jpeg")));
+        		max.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/cold.png")));
         		max.setBackground(new Color(255, 255, 255, 100));
         		max.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
         		contentPane.add(max);
@@ -174,7 +183,7 @@ public class Interfaccia extends JFrame {
 
      JLabel windspeed = new JLabel("Vento");
      windspeed.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/windspeed2.png")));
-     windspeed.setBounds(479, 71, 97, 58);
+     windspeed.setBounds(484, 71, 94, 56);
      windspeed.setBackground(new Color(240, 240, 240, 100));
      windspeed.setOpaque(true);
      windspeed.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -187,7 +196,7 @@ public class Interfaccia extends JFrame {
 	 windspeed.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
     contentPane.add(windspeed);
 
-     windspeedText.setBounds(479, 134, 98, 24);
+     windspeedText.setBounds(484, 134, 94, 24);
      windspeedText.setHorizontalAlignment(SwingConstants.CENTER);
      windspeedText.setFont(new Font("Tahoma", Font.BOLD, 11));
    
@@ -220,12 +229,12 @@ public class Interfaccia extends JFrame {
      contentPane.add(humidityText);
      
      JLabel Sunset = new JLabel("Sunset");
-     Sunset.setBounds(479, 165, 99, 55);
+     Sunset.setBounds(484, 165, 94, 56);
      Sunset.setOpaque(true);
      Sunset.setBackground(new Color(240, 240, 240, 100));
      Sunset.setFont(new Font("Tahoma", Font.BOLD, 10));
      Sunset.setHorizontalAlignment(SwingConstants.CENTER);
-     Sunset.setText("Tramonto");
+     Sunset.setText("");
      Sunset.setVerticalTextPosition(javax.swing.SwingConstants.NORTH);
      Sunset.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/sunset.clipart-md.png")));
      Sunset.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -234,7 +243,7 @@ public class Interfaccia extends JFrame {
      Sunset.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
     contentPane.add(Sunset);
      
-     sunsetText.setBounds(480, 228, 98, 23);
+     sunsetText.setBounds(483, 228, 94, 23);
      sunsetText.setHorizontalAlignment(SwingConstants.CENTER);
      sunsetText.setFont(new Font("Tahoma", Font.BOLD, 11));
      sunsetText.setBackground(new Color(240, 240, 240, 100));
@@ -242,8 +251,8 @@ public class Interfaccia extends JFrame {
      contentPane.add(sunsetText);
      
      JLabel pressione = new JLabel("PressionePanel");
-     pressione.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/pressione2.jpeg")));
-     pressione.setBounds(379, 71, 95, 57);
+     pressione.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/pressure.png")));
+     pressione.setBounds(379, 71, 95, 56);
      pressione.setOpaque(true);
      pressione.setBackground(new Color(240, 240, 240, 100));
      pressione.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -265,7 +274,7 @@ public class Interfaccia extends JFrame {
      contentPane.add(pressioneText);
      
   
-     JLabel Sunrise = new JLabel("Alba");
+     JLabel Sunrise = new JLabel("");
      Sunrise.setVerticalAlignment(SwingConstants.TOP);
      Sunrise.setVerticalTextPosition(SwingConstants.TOP);
      Sunrise.setBounds(378, 165, 96, 56);
@@ -315,7 +324,8 @@ public class Interfaccia extends JFrame {
      
       
 	 
-	   JPanel weatherForecastPanel = new JPanel();
+	   JLabel weatherForecastPanel = new JLabel();
+	   weatherForecastPanel.setIcon(new ImageIcon(Interfaccia.class.getResource("/assets/bcksunny.jpg")));
 	   weatherForecastPanel.setBounds(167, 264, 411, 109);
 	   
 	   weatherForecastPanel.setBackground(new Color(240, 240, 240, 100));
@@ -496,8 +506,7 @@ public class Interfaccia extends JFrame {
 							  searchTextField.setBorder(new LineBorder(new Color(239, 239, 239), 4, true));
 							  searchTextField.setBounds(275, 13, 173, 44);
 							  contentPane.add(searchTextField);
-							  
-							  JButton domoButton = new JButton();
+									  JButton domoButton = new JButton();
 							  domoButton.addActionListener(new ActionListener() {
 							  	public void actionPerformed(ActionEvent e) {
 							  		 // Chiudi la finestra corrente (Interfaccia)
@@ -514,15 +523,14 @@ public class Interfaccia extends JFrame {
 							  domoButton.setLayout(null);
 							  domoButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 							  contentPane.add(domoButton);
-							  
-							  domoButton.addActionListener(new ActionListener() {
-						            public void actionPerformed(ActionEvent e) {
-						                // Azione eseguita quando il pulsante viene premuto
-						                dispose(); // Nascondi la prima interfaccia
-						                InterfacciaDue interfacciaDue = new InterfacciaDue(); // Crea la seconda interfaccia
-						                interfacciaDue.setVisible(true); // Mostra la seconda interfaccia
-						            }
-						        });
+								  domoButton.addActionListener(new ActionListener() {
+									    public void actionPerformed(ActionEvent e) {
+									        // Chiudi la finestra corrente (InterfacciaDue)
+									        dispose();
+									    }
+									});
+
+  
 							  //PULSANTE CERCA PER IL METEO
 							  JButton searchButton = new JButton();
 							  searchButton.setBackground(new Color(255, 255, 255));
@@ -542,7 +550,13 @@ public class Interfaccia extends JFrame {
 								        if (!cityName.isEmpty()) {
 								            JSONObject weatherData = MeteoApp.getWeatherData(cityName);
 								            if (weatherData != null) {
-								                updateUI(weatherData);
+								                try {
+													updateUI(weatherData);
+												} catch (JSONException e1) {
+													// TODO Auto-generated catch block
+													e1.printStackTrace();
+												}
+								                
 								            } else {
 								                JOptionPane.showMessageDialog(null, "Dati meteo non disponibili per questa città", "Errore", JOptionPane.ERROR_MESSAGE);
 								            }
@@ -550,17 +564,11 @@ public class Interfaccia extends JFrame {
 								            JOptionPane.showMessageDialog(null, "Inserire città", "Errore", JOptionPane.ERROR_MESSAGE);
 								        }
 								    }
+									
 								});
         }
-     // Metodo per impostare l'icona del tempo in base alla descrizione meteorologica
-       
-
-		private void weatherData() {
-			// TODO Auto-generated method stub
-			
-		}
-		//METODO PER ESTRARRE I DATI DAL JSON, FORMATO SIA DA UN ARRAY E PIU' OGGETTI
-								public void updateUI(JSONObject weatherData) {
+ 			//METODO PER ESTRARRE I DATI DAL JSON, FORMATO DA UN ARRAY E PIU' OGGETTI
+								public void updateUI(JSONObject weatherData) throws JSONException {
 				
 									JSONObject main = (JSONObject) weatherData.get("main");
 								 
@@ -569,7 +577,7 @@ public class Interfaccia extends JFrame {
 							    	JSONObject sys = (JSONObject) weatherData.get("sys");
 							    	
 							    	JSONArray weatherArray = (JSONArray) weatherData.get("weather"); // Ottieni l'array "weather"
-
+							    
 							    	 if (main != null && wind != null && sys != null && weatherArray != null && weatherArray.size() > 0) {
 							    	        // Estrarre i dati dall'array "weather"
 							    	        JSONObject weather = (JSONObject) weatherArray.get(0); // Prendi il primo elemento dell'array
@@ -590,13 +598,28 @@ public class Interfaccia extends JFrame {
 								        String description = (String) weather.get("description");
 								        double windSpeed = (double) wind.get("speed");
 								        long sunrise = (long) sys.get("sunrise");
-								        long sunset = (long) sys.get("sunset");		
+								        long sunset = (long) sys.get("sunset");	
 								        long visibility = (long) weatherData.get("visibility");
+								
+
+								        Object sunriseObject = sys.get("sunrise");
+										if (sunriseObject instanceof Long) {
+										    sunrise = (Long) sunriseObject;
+										} else if (sunriseObject instanceof Integer) {
+										    sunrise = ((Integer) sunriseObject).longValue();
+										} else {
+										    throw new IllegalArgumentException("Valore non valido per sunrise: " + sunriseObject);
+										}
+
+								        Object sunsetObject = sys.get("sunset");
+										if (sunsetObject instanceof Long) {
+										    sunset = (Long) sunsetObject;
+										} else if (sunsetObject instanceof Integer) {
+										    sunset = ((Integer) sunsetObject).longValue();
+										} else {
+										    throw new IllegalArgumentException("Valore non valido per sunset: " + sunsetObject);
+										}
 								      
-								        
-								     // Aggiorna le etichette con i valori appropriati
-								        updateTime(sunrise * 1000, sunset * 1000);
-								        
 								        temperatureText.setText(String.valueOf(temp + "°C"));
 								        maxText.setText(String.valueOf(temp_max + "°C"));
 								        minText.setText(String.valueOf(temp_min + "°C"));
@@ -604,70 +627,33 @@ public class Interfaccia extends JFrame {
 								        humidityText.setText(String.valueOf(humidity +  " " + "%"));
 								        weatherDescription.setText(description + " ");
 								        windspeedText.setText(String.valueOf(windSpeed + " " + "m/h"));
-								       // sunriseText.setText(String.valueOf(sunrise*1000));
-								       // sunsetText.setText(String.valueOf(sunset*1000));
-								       // CurrentDateText.setText(String.valueOf(dt));
+								        sunriseText.setText(String.valueOf(sunrise));
+								        sunsetText.setText(String.valueOf(sunset));
 								        visibilitaText.setText(String.valueOf(visibility + " " + "m"));
-								    		}
-								    	}
-								 //    else {
-								   //     temperatureText.setText("Errore");
-								   //     maxText.setText("Errore");
-								   //     minText.setText("Errore");
-								   //     pressioneText.setText("Errore");
-								   //     humidityText.setText("Errore");
-								   //     weatherDescription.setText("Errore");
-								    //    windspeedText.setText("Errore");
-								    //    sunriseText.setText("Errore");
-								    //    sunsetText.setText("Errore");
-								      //  CurrentDateText.setText("Errore");
-								      //  visibilitaText.setText("Errore");
-								 
+								        
+								     // Converti il timestamp di alba e tramonto in oggetti Date
+								        Date sunriseDate = new Date(sunrise * 1000);
+								        Date sunsetDate = new Date(sunset * 1000);
+
+								        // Formatta le date in stringhe leggibili
+								        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+								        String formattedSunrise = dateFormat.format(sunriseDate);
+								        String formattedSunset = dateFormat.format(sunsetDate);
+
+								        // Imposta il testo dei componenti dell'interfaccia utente con le stringhe formattate
+								        sunriseText.setText(formattedSunrise);
+								        sunsetText.setText(formattedSunset);
+							    	 }
+								}
 								
-								private void updateTime(long sunrise, long sunset) {
-									
-									// Inizializza il timer per aggiornare la data e l'orario ogni secondo
-							        Timer timer = new Timer(1000, e -> updateDateTime());
-							        timer.start();
-
-							        setVisible(true);
-							        
-									 TimeZone.setDefault(TimeZone.getTimeZone("GTM+1"));
-							        // Converti i timestamp in oggetti Date
-							        Date sunriseDate = new Date(sunrise * 1000);
-							        Date sunsetDate = new Date(sunset * 1000);
-							   
-							  
-								// Formatta le date in stringhe leggibili
-						        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-						        String formattedSunrise = dateFormat.format(sunriseDate);
-						        String formattedSunset = dateFormat.format(sunsetDate);
-						  
-								
-						        sunriseText.setText(" " + formattedSunset);
-						        sunsetText.setText(" " + formattedSunrise);
-						     
-						    }
-
-						    // Metodo per aggiornare la data e l'orario corrente
-						    private void updateDateTime() {
-						        // Ottieni la data e l'orario correnti
-						        Date currentDate = new Date();
-						        // Formatta la data e l'orario correnti
-						        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM" + " " + "HH:mm");
-						        // Imposta il fuso orario a GMT
-						        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-						        String formattedDateTime = dateFormat.format(currentDate);
-						        // Aggiorna il testo del currentDateLabel
-						        CurrentDateText.setText(" " + formattedDateTime);
-						    }
-
-
-								    public static void main(String[] args) {
+							           // public void actionPerformed(ActionEvent e) {
+							             //   dispose(); // Nascondi la prima interfaccia
+							          //  }
+								 public static void main(String[] args) {
 								        SwingUtilities.invokeLater(() -> {
-								            Interfaccia interfaccia = new Interfaccia();
-								            interfaccia.setVisible(true);
+								        	  Interfaccia interfaccia = new Interfaccia(); // Creazione dell'istanza della classe Interfaccia
+								              interfaccia.setVisible(true);
 								        });
-								    }
-}
+								 }
+								}
 								

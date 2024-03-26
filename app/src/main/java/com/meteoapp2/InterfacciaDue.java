@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -14,6 +16,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
@@ -21,15 +24,15 @@ import java.awt.Toolkit;
 public class InterfacciaDue extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JLabel weatherDataLabel;
-	private JLabel weatherDescription;
-	private JLabel temperatureText;
+	public JPanel contentPane;
+	public JLabel weatherDataLabel;
+	public JLabel weatherDescription;
+	public JLabel temperatureText;
+	public Interfaccia interfaccia;
 	
 
 	public InterfacciaDue() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(InterfacciaDue.class.getResource("/assets/mhome.png")));
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setSize(616, 432);
@@ -92,11 +95,10 @@ public class InterfacciaDue extends JFrame {
 	             
 	             // Inizializzazione delle variabili
 	             temperatureText = new JLabel();
-	             temperatureText.setForeground(new Color(255, 255, 255));
-	            
 	             temperatureText.setVerticalTextPosition(SwingConstants.BOTTOM);
-	             temperatureText.setText("17 °C");
-	             temperatureText.setIcon(new javax.swing.ImageIcon("src/main/resources/assets/clear.png"));
+	             temperatureText.setText("17°C");
+	             temperatureText.setForeground(new Color(255, 255, 255));
+	             temperatureText.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/mparty.png")));
 	             temperatureText.setBounds(4, 2, 130, 148);
 	             weatherDataLabel.add(temperatureText);
 	             temperatureText.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
@@ -105,6 +107,7 @@ public class InterfacciaDue extends JFrame {
 	        temperatureText.setHorizontalAlignment(SwingConstants.CENTER);
 	        temperatureText.setFont(new Font("Tahoma", Font.BOLD, 24));
 	        weatherDescription = new JLabel();
+	        weatherDescription.setText("poche nuvole");
 	        weatherDescription.setBounds(-1, 157, 137, 25);
 	        weatherDataLabel.add(weatherDescription);
 	        weatherDescription.setBorder(new LineBorder(new Color(128, 128, 255), 0, true));
@@ -115,8 +118,7 @@ public class InterfacciaDue extends JFrame {
 	        weatherDescription.setLayout(null);
 	        
 	        weatherDescription.setFont(new Font("Dialog", Font.BOLD, 14));
-	        weatherDescription.setText("sereno");
-		
+	
 		weatherDataLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -158,8 +160,11 @@ public class InterfacciaDue extends JFrame {
 			
 			}
         });
-		
-		JLabel camera = new JLabel("");
+	
+
+
+
+   	JLabel camera = new JLabel("");
 	 camera.setHorizontalAlignment(SwingConstants.CENTER);
 		camera.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/bedroom2.jpg")));
 		camera.setBounds(459, 150, 112, 121);
@@ -182,32 +187,59 @@ public class InterfacciaDue extends JFrame {
 		lblNewLabel_3.setIcon(new ImageIcon(InterfacciaDue.class.getResource("/assets/buzz-ext.png")));
 		lblNewLabel_3.setBounds(461, 316, 109, 44);
 		contentPane.add(lblNewLabel_3);
-	}
-
-	public  void main(String[] args) {
-      
-
-SwingUtilities.invokeLater(() -> new Interfaccia());
-        }
-
-
-	public JLabel getWeatherDataLabel() {
-		return weatherDataLabel;
-	}
-
-
-	public void setWeatherDataLabel(JLabel weatherDataLabel) {
-		this.weatherDataLabel = weatherDataLabel;
-	}
-
-	public void setInterfaccia(Interfaccia interfacciaMock) {
-		// TODO Auto-generated method stub
+		
+		  // temperatureText.setText(String.valueOf(temp + "°C"));
+	       // weatherDescription.setText(description);
 		
 	}
+	
+public static void main(String[] args) {
+	        SwingUtilities.invokeLater(() -> {
+	            InterfacciaDue interfacciaDue = new InterfacciaDue();
+	            interfacciaDue.setVisible(true);
+	        });
 
-	public void mouseClicked(MouseEvent mockMouseEvent) {
-		// TODO Auto-generated method stub
-		
-	}
-	}
+}
+    	 
+
+public static long getSerialversionuid() {
+	return serialVersionUID;
+}
+
+public void updateUI(JSONObject weatherData) {
+	JSONObject main = (JSONObject) weatherData.get("main");
+
+	
+	JSONArray weatherArray = (JSONArray) weatherData.get("weather"); // Ottieni l'array "weather"
+
+	 if (main != null && weatherArray != null && weatherArray.size() > 0) {
+	        // Estrarre i dati dall'array "weather"
+	        JSONObject weather = (JSONObject) weatherArray.get(0); // Prendi il primo elemento dell'array
+	        
+    	double temp = 0.0;
+    	try {
+    		temp = (double)main.get("temp");
+    	}
+    		catch (Exception e) {
+    			Long longTemp = (long) main.get("temp");
+    			temp= longTemp.doubleValue();
+    		}
+    	
+        String description = (String) weather.get("description");
+ 
+        temperatureText.setText(String.valueOf(temp + "°C"));
+       
+        weatherDescription.setText(description + " ");
+   
+        // Formatta le date in stringhe leggibili
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+   
+}
+	
+}
+
+
+
+}
+
 

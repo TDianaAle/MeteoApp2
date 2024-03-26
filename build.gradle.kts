@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     implementation("com.googlecode.json-simple:json-simple:1.1")
+     
     implementation("org.openjfx:javafx-controls:16")
     implementation("org.openjfx:javafx-media:16")
     implementation("org.json:json:20210307")
