@@ -157,7 +157,8 @@ La classe MeteoApp implementa un'applicazione per ottenere dati meteorologici ut
 All'inizio pensavano di interpretare qui il tracciato json restituito, ma risultava troppo complesso e confusionario;
 inoltre, l'idea è quella di realizzare solo soluzioni scalabili e in questo senso MeteoApp è prototipo di una ipotetica famiglia di classi "connettore" che recuperano dati (open-data) da API online; un connettore per ogni "fonte", come semplice adattamento di questa.
 
-La soluzione segue un modello comune di invio di richieste HTTP a un'API esterna e l'elaborazione della risposta JSON, utilizzando classi standard di Java, sia per gestire la connessione HTTP, sia per l'analisi le JSON.
+La soluzione segue un modello comune di invio di richieste HTTP a un'API esterna e l'elaborazione della risposta JSON, utilizzando classi standard di Java, sia per gestire la connessione HTTP, sia per l'analisi del JSON.
+
 ![MeteoApp1](https://github.com/TDianaAle/MeteoApp2/assets/153687631/48c9e647-fdd8-457c-8df8-8a65e37f5676)
 
 L'output è un oggetto JSONObject, contenente i dati meteorologici che passeremo direttamente a "interfaccia" o ad un modulo "collettore", nel caso in cui per una materia/servizio decidessimo di integrare più fonti.
