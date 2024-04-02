@@ -441,17 +441,14 @@ public void updateUI(JSONObject weatherData) {
 
 
 ### Diana
-Ho dedicato al progetto tutte le sere dopo il lavoro per circa 3 mesi e qualche week-end.
-Come esperienza pregressa con Java ho fatto un tirocinio dove [...], ma non si trattava di sviluppare da zero e Graddle era utilizzato soprattutto per [...]; è stata una novità utilizzare l'approccio visto al corso, strutturando il package in modo diverso da quello a qui ero abituata.
+Ho dedicato al progetto tutte le sere dopo il lavoro, per circa 1 mese e mezzo.
+Come esperienza pregressa ho partecipato, grazie all'opportunità di un tirocinio, alla creazione di una semplice Guestbook in linguaggio Java, utilizzando principalmente la piattaforma di sviluppo Liferay DXP e Gradle per la gestione delle dipendenze. Ho deciso di utilizzare lo stesso ambiente di sviluppo utilizzato per il tirocinio, cioè Eclipse.
 
-Non siamo riusciti a integrare i nostri IDE (io uno Eclipse e Fabio VSC) e eclipse al mio GitHub;
-questo problema ci ha impedito di fare dei veri e propri merge e ci ha costretto a ripartire da zero dopo poche settimane dall'avio del lavoro.
-Alla fine abbiamo ovviato, facendo io le push con GitHub-Desktop e Fabio le pull da VMS, passandoci le porzioni di codice da testare e integrare con meet o teams e più spesso durante sessioni serali di lavoro online.
+Grazie all'integrazione nativa di Git in Eclipse, siamo stati in grado di gestire efficacemente le modifiche apportate al codice. Tuttavia, l'impedimento nella migrazione del progetto da Eclipse a Visual Studio Code, a causa delle differenze tra gli ambienti di sviluppo, ci ha costretto a coordinare il lavoro da remoto per le modifiche al codice e la generazione di report. Questa esperienza mi ha portato a riflettere sull'inefficienza che può derivare dal lavorare in modo isolato sul codice, specialmente quando si incontra difficoltà nel trovare soluzioni. Il confronto e la collaborazione con il mio collega Fabio si sono rivelati cruciali per prendere decisioni ponderate e avanzare con maggiore velocità nel progetto nel suo complesso.
 
-L'interpretazione del JSON è risultata abbastanza complicata, perché i dati che riceviamo (come descritto negli altri punti della relazione) sono piuttosto eterogenei.
-Mi sono occupata della definizione del package in generale, della realizzazione delle GUI, della lib MeteoApp e dello "scheletro" delle altre, completate da Fabio che poi è intervenuto sulle mie parti, dove magari ci serviva un confronto oppure in caso di problemi di UX o disallineamento rispetto alla fase di progettazione.
+Mi sono occupata della struttura del package in generale, della ricerca delle librerie utili e del plug-in Windows Builder con il quale ho realizzato il design della GUI, il tutto completato da Fabio che in seguito è intervenuto sulle mie parti, dove serviva un confronto oppure in caso di problemi di UX o disallineamento rispetto alla fase di progettazione.
 
-Sono molto soddisfatta dal risultato finale!
+Sono abbastanza soddisfatta del risultato finale.
 
 
 
