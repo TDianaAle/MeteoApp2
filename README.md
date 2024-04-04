@@ -467,15 +467,6 @@ La soluzione esegue le azioni previste nel contesto specifico (device dedicato a
 # Guida Utente
 
 
-## Per l'utente
-
-
-
-## Per il dev
-
-
-
-
 
 ***
 ## REF
