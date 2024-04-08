@@ -1,6 +1,7 @@
 plugins {
     id("application")
     id("java")
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 repositories {
@@ -31,9 +32,16 @@ tasks {
     withType<Javadoc>().configureEach { options.encoding = "UTF-8" }
     withType<Test>().configureEach { defaultCharacterEncoding = "UTF-8" }
 }
+
 application {
     mainClass.set("com.meteoapp2.Interfaccia")
+    mainClassName = "com.meteoapp2.Interfaccia"
+    
+}
+tasks.jar {
+    manifest.attributes["Main-Class"] = "com.meteoapp2.Interfaccia"
 }
 
+   
 
    

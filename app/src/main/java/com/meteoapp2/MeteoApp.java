@@ -22,7 +22,7 @@ import org.json.simple.parser.JSONParser;
 
 public class MeteoApp {
     private static final String API_KEY = "e58f4fd59c7b9967eebedc1d199162db";
-    private static final String WEATHER_DATA_FILE = "weather_data.json";
+ //   private static final String WEATHER_DATA_FILE = "weather_data.json";
     public static JSONObject getWeatherData(String cityName) {
         try {
             String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(cityName, "UTF-8") + "&lang=it&units=metric&APPID=" + URLEncoder.encode("e58f4fd59c7b9967eebedc1d199162db", "UTF-8");

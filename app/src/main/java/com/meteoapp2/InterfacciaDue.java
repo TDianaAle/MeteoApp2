@@ -16,7 +16,6 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
@@ -230,9 +229,6 @@ public void updateUI(JSONObject weatherData) {
         temperatureText.setText(String.valueOf(temp + "°C"));
        
         weatherDescription.setText(description + " ");
-   
-        // Formatta le date in stringhe leggibili
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
    
 }
 	
