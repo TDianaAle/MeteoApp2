@@ -465,8 +465,21 @@ La soluzione esegue le azioni previste nel contesto specifico (device dedicato a
 
 
 # Guida Utente
+Scaricare il "FatJar" qui https://github.com/TDianaAle/MeteoApp2/blob/09cd808282464adf8d090e9805a9657af3957071/MeteoApp2-all.jar
+Avviarlo da rica di comando con java -jar MeteoApp2-all.jar
 
+In alternativa (es. JVE/JVM not found) abbiamo uno Zip contenente una cartella eseguibile
+https://github.com/TDianaAle/MeteoApp2/blob/09cd808282464adf8d090e9805a9657af3957071/build/distributions/MeteoApp2.zip
+ - copiare il contenuto in una cartella locale
+ - entrare in bin
+ - lanciare (doppio click) sul file MeteoApp2.bat
 
+Come descritto sopra si tratta dell'integrazione della MeteoApp in un _dispositivo di domotica simulato_ 
+
+ - Selezionare una Città e cliccare sulla lente di ingrandimento per avere i dati meteo in realtime
+ - il tasto HOME porta alla consolle di domotica
+ - nella HOME è attivo solo in tasto per toranre alla MeteoApp
+ - il resto è una presentazione di dti statici 
 
 ***
 ## REF
