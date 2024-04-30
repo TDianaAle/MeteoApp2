@@ -12,17 +12,13 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-
 public class MeteoApp {
     private static final String API_KEY = "e58f4fd59c7b9967eebedc1d199162db";
- //   private static final String WEATHER_DATA_FILE = "weather_data.json";
     public static JSONObject getWeatherData(String cityName) {
         try {
             String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + URLEncoder.encode(cityName, "UTF-8") + "&lang=it&units=metric&APPID=" + URLEncoder.encode("e58f4fd59c7b9967eebedc1d199162db", "UTF-8");
@@ -35,10 +31,8 @@ public class MeteoApp {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(reader);
                 reader.close();
-                
                 writeJSONToFile(jsonObject, "weather_data.json");
                 return jsonObject;
-                
             } else {
                 System.err.println("HTTP request failed with response code: " + responseCode);
                 JOptionPane.showMessageDialog(null, "Errore nella richiesta API", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -50,6 +44,7 @@ public class MeteoApp {
             return null;
         }
     }
+	
     private static void writeJSONToFile(JSONObject jsonObject, String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write(jsonObject.toJSONString());
@@ -58,13 +53,12 @@ public class MeteoApp {
             JOptionPane.showMessageDialog(null, "Errore nella scrittura dei dati", "Errore", JOptionPane.ERROR_MESSAGE);
         }
     }
-		
 	
-		public static String getApiKey() {
+    public static String getApiKey() {
 	        return API_KEY;
-	    }
+    }
 	
-		 public static JSONObject getStoredWeatherData() {
+    public static JSONObject getStoredWeatherData() {
 		        JSONObject weatherData = null;
 		        try {
 		            Path filePath = Paths.get("weather_data.json");
@@ -79,8 +73,7 @@ public class MeteoApp {
 		        }
 		        return weatherData;
 		    }
-
-		 public static void main(String[] args) {
+	public static void main(String[] args) {
 		        SwingUtilities.invokeLater(() -> {
 		            new Interfaccia();
 		        });
